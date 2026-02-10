@@ -1,8 +1,8 @@
 class Terrakube < Formula
     desc "terrakube command line tool"
     homepage "https://docs.terrakube.io/"
-    url "https://github.com/azbuilder/terrakube-cli/releases/download/v1.0.0-beta/terrakube-v1.0.0-beta-darwin-amd64.tar.gz"
-    sha256 "468ea2c025dbc201c4ec7221a8bccfb6a0d4192b287e3f9d5696836ff7310f30"
+    url "https://github.com/terrakube-io/terrakube-cli/releases/download/v1.0.0-beta.2/terrakube-v1.0.0-beta.2-darwin-amd64.tar.gz"
+    sha256 "a7463a1b0db4248d8e584f22ab3df9986a5c5ed1b3c92b076451e883031d8df4"
     license "Apache-2.0"
   
   
