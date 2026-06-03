@@ -69,40 +69,40 @@ jobs:
       - name: Update formula with new bottle SHAs
         run: |
           set -euo pipefail
-
           VERSION="${{ steps.version.outputs.version }}"
 
-          # Read SHAs from environment variables set during build
-          BIG_SUR_SHA="${big_sur}"
-          ARM64_BIG_SUR_SHA="${arm64_big_sur}"
-          X86_64_LINUX_SHA="${x86_64_linux}"
-          AARCH64_LINUX_SHA="${aarch64_linux}"
-
-          # Generate the new bottle block
-          BOTTLE_BLOCK=$(cat <<EOF
-            bottle do
-              root_url "https://github.com/terrakube-io/homebrew-cli/releases/download/v${VERSION}"
-              sha256 cellar: :any_skip_relocation, big_sur:        "${BIG_SUR_SHA}"
-              sha256 cellar: :any_skip_relocation, arm64_big_sur:  "${ARM64_BIG_SUR_SHA}"
-              sha256 cellar: :any_skip_relocation, x86_64_linux:   "${X86_64_LINUX_SHA}"
-              sha256 cellar: :any_skip_relocation, aarch64_linux:  "${AARCH64_LINUX_SHA}"
+          ruby -e '
+            version = ARGV[0]
+            formula_file = "Formula/terrakube.rb"
+            
+            def get_sha(name)
+              ENV[name] || "MISSING_SHA"
             end
-          EOF
-          )
 
-          # Update the formula: replace existing bottle block or insert before def install
-          FORMULA="Formula/terrakube.rb"
-
-          if grep -q "bottle do" "$FORMULA"; then
-            # Replace existing bottle block
-            sed -i '/^  bottle do$/,/^  end$/c\'"$(echo "$BOTTLE_BLOCK")" "$FORMULA"
-          else
-            # Insert bottle block before 'def install'
-            sed -i "/^  def install$/i\\${BOTTLE_BLOCK}\n" "$FORMULA"
-          fi
-
-          # Also update the version if it changed
-          sed -i "s/version \".*\"/version \"${VERSION}\"/" "$FORMULA"
+            bottle_block = [
+              "  bottle do",
+              "    root_url \"https://github.com/terrakube-io/homebrew-cli/releases/download/v#{version}\"",
+              "    sha256 cellar: :any_skip_relocation, big_sur:        \"#{get_sha('big_sur')}\"",
+              "    sha256 cellar: :any_skip_relocation, arm64_big_sur:  \"#{get_sha('arm64_big_sur')}\"",
+              "    sha256 cellar: :any_skip_relocation, x86_64_linux:   \"#{get_sha('x86_64_linux')}\"",
+              "    sha256 cellar: :any_skip_relocation, aarch64_linux:  \"#{get_sha('aarch64_linux')}\"",
+              "  end"
+            ].join("\n")
+            
+            content = File.read(formula_file)
+            
+            # Update version
+            content.sub!(/version\s+".*?"/, "version \"#{version}\"")
+            
+            # Update or insert bottle block
+            if content.include?("bottle do")
+              content.sub!(/^  bottle do.*?^  end/m, bottle_block)
+            else
+              content.sub!(/^  def install/, bottle_block + "\n\n  def install")
+            end
+            
+            File.write(formula_file, content)
+          ' "${VERSION}"
 
       - name: Commit and push formula update
         run: |
