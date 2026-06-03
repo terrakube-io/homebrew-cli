@@ -25,12 +25,6 @@ class Terrakube < Formula
     end
   end
 
-  # Tells Homebrew that this package contains pre-compiled code 
-  # and skips standard host architecture build evaluations.
-  def shared_library(name, version = nil)
-    name
-  end
-
   def install
     bin.install "terrakube"
   end
