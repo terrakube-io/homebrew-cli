@@ -25,10 +25,12 @@ class Terrakube < Formula
     end
   end
 
-  # Tells Homebrew that this package contains pre-compiled code 
-  # and skips standard host architecture build evaluations.
-  def shared_library(name, version = nil)
-    name
+  bottle do
+    root_url "https://github.com/terrakube-io/homebrew-cli/releases/download/v1.0.0-beta.5"
+    sha256 cellar: :any_skip_relocation, big_sur:        "56b67362e10b25ba5368096938c87d408c2a3d9c484358e9cfef1eb2ad68b11a"
+    sha256 cellar: :any_skip_relocation, arm64_big_sur:  "6be8bf72b8f00ef159d21062f403c58da49238d9e3cc2e9b2df24f19832dd1ad"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:   "739f4b134d00942064dde39bc6bb23b009ffeb0313f61f1c24eaf96fb38e7aa4"
+    sha256 cellar: :any_skip_relocation, aarch64_linux:  "7bdb9ab62c6b5aa19c9ee9308ecb56b967159dffbef6e214cb0523a3cbe3b7ad"
   end
 
   def install
@@ -36,6 +38,6 @@ class Terrakube < Formula
   end
 
   test do
-    system "#{bin}/terrakube", "--version"
+    system "#{bin}/terrakube", "help"
   end
 end
