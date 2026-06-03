@@ -23,7 +23,6 @@ class Terrakube < Formula
       url "https://github.com/terrakube-io/terrakube-cli/releases/download/v#{version}/terrakube-v#{version}-linux-arm64.tar.gz"
       sha256 "525b8a69b6c1d8c32dcb24d18ba0783a57b3d637339a6bcb7b39de05b892576e"
     end
-  end
 
   bottle do
     root_url "https://github.com/terrakube-io/homebrew-cli/releases/download/v1.0.0-beta.5"
