@@ -23,6 +23,10 @@ class Terrakube < Formula
       url "https://github.com/terrakube-io/terrakube-cli/releases/download/v#{version}/terrakube-v#{version}-linux-arm64.tar.gz"
       sha256 "525b8a69b6c1d8c32dcb24d18ba0783a57b3d637339a6bcb7b39de05b892576e"
     end
+
+    # Homebrew for Linux requires a compiler to be present to install any formula 
+    # from source (i.e. without a bottle), even if it's a pre-compiled binary.
+    depends_on "gcc" => :build
   end
 
   def install
