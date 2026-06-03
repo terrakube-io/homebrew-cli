@@ -5,6 +5,12 @@ class Terrakube < Formula
 
   version "1.0.0-beta.5"
 
+  # Tells Homebrew this is a pure binary package and skips the Linux compiler check
+  pour_bottle? do
+    reason "The formula only installs a pre-compiled binary."
+    satisfy { true }
+  end
+
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/terrakube-io/terrakube-cli/releases/download/v#{version}/terrakube-v#{version}-darwin-amd64.tar.gz"
