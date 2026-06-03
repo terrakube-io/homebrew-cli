@@ -75,17 +75,17 @@ jobs:
             version = ARGV[0]
             formula_file = "Formula/terrakube.rb"
             
-            def get_sha(name)
-              ENV[name] || "MISSING_SHA"
+            shas = %w[big_sur arm64_big_sur x86_64_linux aarch64_linux].each_with_object({}) do |k, h|
+              h[k] = ENV[k] || "MISSING_SHA"
             end
 
             bottle_block = [
               "  bottle do",
               "    root_url \"https://github.com/terrakube-io/homebrew-cli/releases/download/v#{version}\"",
-              "    sha256 cellar: :any_skip_relocation, big_sur:        \"#{get_sha('big_sur')}\"",
-              "    sha256 cellar: :any_skip_relocation, arm64_big_sur:  \"#{get_sha('arm64_big_sur')}\"",
-              "    sha256 cellar: :any_skip_relocation, x86_64_linux:   \"#{get_sha('x86_64_linux')}\"",
-              "    sha256 cellar: :any_skip_relocation, aarch64_linux:  \"#{get_sha('aarch64_linux')}\"",
+              "    sha256 cellar: :any_skip_relocation, big_sur:        \"#{shas["big_sur"]}\"",
+              "    sha256 cellar: :any_skip_relocation, arm64_big_sur:  \"#{shas["arm64_big_sur"]}\"",
+              "    sha256 cellar: :any_skip_relocation, x86_64_linux:   \"#{shas["x86_64_linux"]}\"",
+              "    sha256 cellar: :any_skip_relocation, aarch64_linux:  \"#{shas["aarch64_linux"]}\"",
               "  end"
             ].join("\n")
             
