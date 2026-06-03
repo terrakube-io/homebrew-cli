@@ -48,8 +48,7 @@ jobs:
 
             STAGING=$(mktemp -d)
             mkdir -p "${STAGING}/${FORMULA_NAME}/${VERSION}/bin"
-            curl -sL "$ARCHIVE_URL" | tar xz -C "${STAGING}/"
-            mv "${STAGING}/terrakube" "${STAGING}/${FORMULA_NAME}/${VERSION}/bin/"
+            curl -sL "$ARCHIVE_URL" | tar xz -C "${STAGING}/${FORMULA_NAME}/${VERSION}/bin"
 
             (cd "${STAGING}" && tar czf "${GITHUB_WORKSPACE}/bottles/${BOTTLE_FILE}" "${FORMULA_NAME}")
 

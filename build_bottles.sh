@@ -39,8 +39,7 @@ for PLATFORM in "${!TAGS[@]}"; do
   # Download and extract the binary
   STAGING="${WORKDIR}/${PLATFORM}"
   mkdir -p "${STAGING}/${FORMULA_NAME}/${VERSION}/bin"
-  curl -sL "$ARCHIVE_URL" | tar xz -C "${STAGING}/"
-  mv "${STAGING}/terrakube" "${STAGING}/${FORMULA_NAME}/${VERSION}/bin/"
+  curl -sL "$ARCHIVE_URL" | tar xz -C "${STAGING}/${FORMULA_NAME}/${VERSION}/bin"
 
   # Create the bottle tar.gz
   (cd "${STAGING}" && tar czf "${OUTDIR}/${BOTTLE_FILE}" "${FORMULA_NAME}")
