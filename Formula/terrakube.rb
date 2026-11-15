@@ -5,21 +5,21 @@
 class Terrakube < Formula
   desc "Command-line interface for Terrakube"
   homepage "https://github.com/terrakube-io/terrakube-cli"
-  version "1.0.0-rc.1"
+  version "1.0.0-rc.2"
   license "Apache-2.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/terrakube-io/terrakube-cli/releases/download/v1.0.0-rc.1/terrakube_1.0.0-rc.1_darwin_amd64.tar.gz"
-      sha256 "e653ec71f5c0e320d3862c341320756785b5bcd73f13c6ff06200ee4e7afcf20"
+      url "https://github.com/terrakube-io/terrakube-cli/releases/download/v1.0.0-rc.2/terrakube_1.0.0-rc.2_darwin_amd64.tar.gz"
+      sha256 "8a4f1d7d116f96f04c585723799491e7b7058a9c768f8f8537dc41c23a80081f"
 
       define_method(:install) do
         bin.install "terrakube"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/terrakube-io/terrakube-cli/releases/download/v1.0.0-rc.1/terrakube_1.0.0-rc.1_darwin_arm64.tar.gz"
-      sha256 "1274a17db54c312726ddc98ebed3ba22f41d8bb27f1cb6ff37f7cbd3bdcd7b0e"
+      url "https://github.com/terrakube-io/terrakube-cli/releases/download/v1.0.0-rc.2/terrakube_1.0.0-rc.2_darwin_arm64.tar.gz"
+      sha256 "44bcbbcaaeeff4d636e0dab5c644b8c079d0f6c11aef702217ebfdfee7a4d12c"
 
       define_method(:install) do
         bin.install "terrakube"
@@ -29,15 +29,15 @@ class Terrakube < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/terrakube-io/terrakube-cli/releases/download/v1.0.0-rc.1/terrakube_1.0.0-rc.1_linux_amd64.tar.gz"
-      sha256 "4e1354278635a457868ae1b5cf535e99e37d75f8306ea038677c9f965911f074"
+      url "https://github.com/terrakube-io/terrakube-cli/releases/download/v1.0.0-rc.2/terrakube_1.0.0-rc.2_linux_amd64.tar.gz"
+      sha256 "67b2246eb8527e5cca6051c7e8727cda679e2891727bcf23955b02fa75954509"
       define_method(:install) do
         bin.install "terrakube"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/terrakube-io/terrakube-cli/releases/download/v1.0.0-rc.1/terrakube_1.0.0-rc.1_linux_arm64.tar.gz"
-      sha256 "99d1fd45ea722ecfe83aabff8ab8caf264ff6b8e5b9fa1d52230c916d0409319"
+      url "https://github.com/terrakube-io/terrakube-cli/releases/download/v1.0.0-rc.2/terrakube_1.0.0-rc.2_linux_arm64.tar.gz"
+      sha256 "657d8345b30da7ca6fc3ba740a13d9f71eefcffa87cc4d9dbd78a0cd7da7d639"
       define_method(:install) do
         bin.install "terrakube"
       end
